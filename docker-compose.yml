@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  house-price-prediction-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: house-price-prediction-api:latest
+    container_name: house_price_prediction_service
+    ports:
+      - "8000:8000"
+    environment:
+      - CONFIG_PATH=config.yaml
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped

@@ -1,0 +1,46 @@
+name: Lab 8 - House Price MLOps CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  mlops-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Data Schema & Corruption Guard Test
+        run: python src/simulate_data_corruption.py
+
+      - name: Execute Full End-to-End MLOps Pipeline
+        run: python pipelines/run_mlops_pipeline.py
+
+      - name: Verify In-Process Model Serving
+        run: python test_api.py
+
+      - name: Upload CI Artifacts and Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: house-price-ci-${{ github.run_number }}
+          path: |
+            artifacts/**
+            outputs/**
+            models/**
+            mlruns/**
+          if-no-files-found: ignore

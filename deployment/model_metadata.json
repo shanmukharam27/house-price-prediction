@@ -1,0 +1,10 @@
+{
+    "model_name": "House_Price_Production_Model",
+    "model_version": "2",
+    "model_stage": "Production",
+    "run_id": "0bf3f6d2ee2d460693c1d32e820a5d99",
+    "model_source": "models:/m-6b5b541e86504c22b225f403f2e67134",
+    "model_id": "m-6b5b541e86504c22b225f403f2e67134",
+    "preprocessor_artifact": "preprocessing_pipeline/preprocessor.pkl",
+    "source": "MLflow"
+}

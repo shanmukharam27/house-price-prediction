@@ -1,0 +1,15 @@
+project:
+  name: "House Price Prediction"
+  target: "SalePrice"
+
+paths:
+  train_data: "data/raw/train.csv"
+  test_data: "data/raw/test.csv"
+  processed_data: "data/processed"
+  models: "models"
+  outputs: "outputs"
+  reports: "reports"
+
+model:
+  random_state: 42
+  cv_folds: 5
